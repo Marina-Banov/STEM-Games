@@ -1,3 +1,4 @@
+import boxes
 import cipher
 import modulo
 import all_the_boxes
@@ -12,6 +13,22 @@ def test_cipher():
         sa, assert_res = t
         res = cipher.main(sa)
         e = f"cipher({sa}) == {res} --- Should be {assert_res}"
+        try:
+            assert assert_res == res, e
+            # print(f"Passed {i+1} tests")
+        except Exception as e:
+            print(e)
+            return False
+    return True
+
+
+def test_boxes():
+    data = [(1, 2, 1), (10, 4, 6), (500, 125, 193)]
+
+    for i, t in enumerate(data):
+        m, n, assert_res = t
+        res = boxes.main(m, n)
+        e = f"boxes({m}, {n}) == {res} --- Should be {assert_res}"
         try:
             assert assert_res == res, e
             # print(f"Passed {i+1} tests")
@@ -61,10 +78,11 @@ def test_all_the_boxes():
 if __name__ == "__main__":
     mode = 0
     input_string = """\n   1 - Cipher
-       2 - Modulo
-       3 - All the boxes
+       2 - Boxes
+       3 - Modulo
+       4 - All the boxes
        Choose the script you want to test: """
-    while mode not in list(range(1,4)):
+    while mode not in list(range(1,5)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception as e:
@@ -73,8 +91,10 @@ if __name__ == "__main__":
     if mode == 1:
         res = test_cipher()
     elif mode == 2:
-        res = test_modulo()
+        res = test_boxes()
     elif mode == 3:
+        res = test_modulo()
+    elif mode == 4:
         res = test_all_the_boxes()
     if res:
         print("Everything passed")
