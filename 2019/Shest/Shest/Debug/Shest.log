@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\Anton\source\repos\Shest\Shest\main.cpp(29,33): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Anton\source\repos\Shest\Shest\main.cpp(29,67): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Anton\source\repos\Shest\Shest\main.cpp(61,33): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Anton\source\repos\Shest\Shest\main.cpp(61,67): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Anton\source\repos\Shest\Shest\main.cpp(118,34): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+  Shest.vcxproj -> C:\Users\Anton\source\repos\Shest\Debug\Shest.exe
