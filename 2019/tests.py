@@ -1,12 +1,14 @@
 import boxes
 import cipher
 import modulo
+import fence
 import all_the_boxes
 
 
 def test_cipher():
     data = [
-        ("kszqcas hc ghsa uoasg hsqvbczcum ofsbo", "welcome to stem games technology arena"),
+        ("kszqcas hc ghsa uoasg hsqvbczcum ofsbo",
+         "welcome to stem games technology arena"),
     ]
 
     for i, t in enumerate(data):
@@ -54,6 +56,27 @@ def test_modulo():
     return True
 
 
+def test_fence():
+    data = [
+        ([[0, 0], [0, 1], [1, 1], [1, 2], [2, 2], [2, 0], [0, 0]], 1),
+        ([[1, 1], [1, 5], [3, 5], [3, 7], [2, 7], [2, 9], [6, 9],
+          [6, 7], [5, 7], [5, 3], [4, 3], [4, 4], [3, 4], [3, 2],
+          [5, 2], [5, 1], [1, 1]], 6)
+    ]
+
+    for i, t in enumerate(data):
+        coordinates, assert_res = t
+        res = fence.main(coordinates)
+        e = f"fence({coordinates}) == {res} --- Should be {assert_res}"
+        try:
+            assert assert_res == res, e
+            # print(f"Passed {i+1} tests")
+        except Exception as e:
+            print(e)
+            return False
+    return True
+
+
 def test_all_the_boxes():
     data = [
         (1, 7, 28), (1, 8, 36), (2, 7, 35), (2, 8, 46), (3, 7, 37),
@@ -80,9 +103,10 @@ if __name__ == "__main__":
     input_string = """\n   1 - Cipher
        2 - Boxes
        3 - Modulo
-       4 - All the boxes
+       4 - Fence
+       5 - All the boxes
        Choose the script you want to test: """
-    while mode not in list(range(1,5)):
+    while mode not in list(range(1, 5+6)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception as e:
@@ -95,6 +119,10 @@ if __name__ == "__main__":
     elif mode == 3:
         res = test_modulo()
     elif mode == 4:
+        res = test_fence()
+    elif mode == 5:
         res = test_all_the_boxes()
+    else:
+        res = False
     if res:
         print("Everything passed")

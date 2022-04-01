@@ -1,5 +1,5 @@
 def main(m, n):
-    boxes = [True for i in range(m)]
+    boxes = [True for _ in range(m)]
 
     for i in range(2, n+1):
         if i % 2:
