@@ -1,4 +1,36 @@
 from itertools import permutations
+import time
+
+def recurrent(brackets, stack, go):
+    _sum = sum(brackets)
+    assert _sum >= 0
+    if _sum == 0:
+        return 1
+
+    _num = 0
+    for i in go:
+        if brackets[i] < 1:
+            continue
+        if i % 2 != 0:
+            if not stack:
+                continue
+            if i - stack[-1] != 1:
+                continue
+            _num += recurrent(brackets[:i] + [brackets[i] - 1] + brackets[i + 1:], stack[:-1], go)
+        else:
+            tmp = stack.copy()
+            tmp.append(i)
+            _num += recurrent(brackets[:i] + [brackets[i] - 1] + brackets[i + 1:], tmp, go)
+
+    return _num
+
+
+def main2(a, b, c):
+    brackets = [a, a, b, b, c, c]
+    stack = []
+
+    return recurrent(brackets, stack, [0, 1, 2, 3, 4, 5])
+
 
 
 def main(a, b, c):
@@ -34,4 +66,11 @@ def main(a, b, c):
 
 
 if __name__ == "__main__":
-    print(main(2, 2, 2))
+    # start = time.time()
+    # print(main(2, 2, 2))
+    # end = time.time()
+    # print(end - start)
+    start = time.time()
+    print(main2(2, 2, 2))
+    end = time.time()
+    print(end - start)
