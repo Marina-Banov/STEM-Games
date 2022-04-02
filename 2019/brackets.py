@@ -1,7 +1,8 @@
 from itertools import permutations
-import time
+# import time
 
-def recurrent(brackets, stack, go):
+
+def recursion(brackets, stack, go):
     _sum = sum(brackets)
     assert _sum >= 0
     if _sum == 0:
@@ -16,61 +17,57 @@ def recurrent(brackets, stack, go):
                 continue
             if i - stack[-1] != 1:
                 continue
-            _num += recurrent(brackets[:i] + [brackets[i] - 1] + brackets[i + 1:], stack[:-1], go)
+            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], stack[:-1], go)
         else:
             tmp = stack.copy()
             tmp.append(i)
-            _num += recurrent(brackets[:i] + [brackets[i] - 1] + brackets[i + 1:], tmp, go)
+            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], tmp, go)
 
     return _num
 
 
-def main2(a, b, c):
-    brackets = [a, a, b, b, c, c]
-    stack = []
-
-    return recurrent(brackets, stack, [0, 1, 2, 3, 4, 5])
-
-
-
-def main(a, b, c):
+def iteration(a, b, c):
     _sum = sum([a, b, c])
     assert _sum > 0
     if _sum < 2:
         return _sum
 
-    num = 0
-    seen = {}
+    # this is bottleneck :(
     bracket_permutation = permutations([1, 2] * a + [3, 4] * b + [5, 6] * c)
+    bracket_permutation = set(bracket_permutation)
+    num = len(bracket_permutation)
+    # print(len(bracket_permutation))
 
     for brackets in bracket_permutation:
         if brackets[0] % 2 == 0:
-            continue
-        bracket_str = ''.join(str(n) for n in brackets)
-        if bracket_str in seen:
+            num -= 1
             continue
 
         current_bracket = []
-        correct = True
         for i in range(len(brackets)):
             if brackets[i] % 2 == 0:
                 if len(current_bracket) < 1 or brackets[i] - current_bracket.pop() != 1:
-                    correct = False
+                    num -= 1
                     break
             else:
                 current_bracket.append(brackets[i])
-        if correct and len(current_bracket) == 0:
-            seen[bracket_str] = 1
-            num += 1
     return num
 
 
+def main(a, b, c, r=True):
+    if r:
+        return recursion([a, a, b, b, c, c], [], [0, 1, 2, 3, 4, 5])
+    else:
+        return iteration(a, b, c)
+
+
 if __name__ == "__main__":
+    a, b, c = list(map(int, input().split()))
     # start = time.time()
-    # print(main(2, 2, 2))
+    # print(main(a, b, c, False))
     # end = time.time()
     # print(end - start)
-    start = time.time()
-    print(main2(2, 2, 2))
-    end = time.time()
-    print(end - start)
+    # start = time.time()
+    print(main(a, b, c))
+    # end = time.time()
+    # print(end - start)
