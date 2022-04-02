@@ -1,8 +1,23 @@
-import boxes
-import cipher
-import modulo
-import fence
-import all_the_boxes
+from cipher import main as cipher
+from boxes import main as boxes
+from modulo import main as modulo
+from fence import main as fence
+from brackets import main as brackets
+from all_the_boxes import main as all_the_boxes
+
+
+def test(data, f, name):
+    for i, t in enumerate(data):
+        *var, assert_res = t
+        res = f(*var)
+        e = f"{name}{tuple(var)} == {res} --- Should be {assert_res}"
+        try:
+            assert assert_res == res, e
+            # print(f"Passed {i+1} tests")
+        except Exception as e:
+            print(e)
+            return False
+    return True
 
 
 def test_cipher():
@@ -10,50 +25,17 @@ def test_cipher():
         ("kszqcas hc ghsa uoasg hsqvbczcum ofsbo",
          "welcome to stem games technology arena"),
     ]
-
-    for i, t in enumerate(data):
-        sa, assert_res = t
-        res = cipher.main(sa)
-        e = f"cipher({sa}) == {res} --- Should be {assert_res}"
-        try:
-            assert assert_res == res, e
-            # print(f"Passed {i+1} tests")
-        except Exception as e:
-            print(e)
-            return False
-    return True
+    return test(data, cipher, "cipher")
 
 
 def test_boxes():
     data = [(1, 2, 1), (10, 4, 6), (500, 125, 193)]
-
-    for i, t in enumerate(data):
-        m, n, assert_res = t
-        res = boxes.main(m, n)
-        e = f"boxes({m}, {n}) == {res} --- Should be {assert_res}"
-        try:
-            assert assert_res == res, e
-            # print(f"Passed {i+1} tests")
-        except Exception as e:
-            print(e)
-            return False
-    return True
+    return test(data, boxes, "boxes")
 
 
 def test_modulo():
     data = [("31", 13), ("1111", -1), ("361542", 654213)]
-
-    for i, t in enumerate(data):
-        n, assert_res = t
-        res = modulo.main(n)
-        e = f"modulo({n}) == {res} --- Should be {assert_res}"
-        try:
-            assert assert_res == res, e
-            # print(f"Passed {i+1} tests")
-        except Exception as e:
-            print(e)
-            return False
-    return True
+    return test(data, modulo, "modulo")
 
 
 def test_fence():
@@ -63,18 +45,12 @@ def test_fence():
           [6, 7], [5, 7], [5, 3], [4, 3], [4, 4], [3, 4], [3, 2],
           [5, 2], [5, 1], [1, 1]], 6)
     ]
+    return test(data, fence, "fence")
 
-    for i, t in enumerate(data):
-        coordinates, assert_res = t
-        res = fence.main(coordinates)
-        e = f"fence({coordinates}) == {res} --- Should be {assert_res}"
-        try:
-            assert assert_res == res, e
-            # print(f"Passed {i+1} tests")
-        except Exception as e:
-            print(e)
-            return False
-    return True
+
+def test_brackets():
+    data = [(3, 0, 0, 5), (2, 1, 0, 15), (2, 2, 2, 11880)]
+    return test(data, brackets, "brackets")
 
 
 def test_all_the_boxes():
@@ -84,34 +60,26 @@ def test_all_the_boxes():
         (14, 15, 399), (14, 16, 442), (15, 15, 413), (15, 16, 428),
         (1, 1, 1), (1, 3, 6), (4, 1, 8),
     ]
-
-    for i, t in enumerate(data):
-        n, m, assert_res = t
-        res = all_the_boxes.main(n, m)
-        e = f"all_the_boxes({n}, {m}) == {res} --- Should be {assert_res}"
-        try:
-            assert assert_res == res, e
-            # print(f"Passed {i+1} tests")
-        except Exception as e:
-            print(e)
-            return False
-    return True
+    return test(data, all_the_boxes, "all_the_boxes")
 
 
-if __name__ == "__main__":
+def main():
     mode = 0
     input_string = """\n   1 - Cipher
        2 - Boxes
        3 - Modulo
        4 - Fence
-       5 - All the boxes
+       5 - Brackets
+       6 - All the boxes
        Choose the script you want to test: """
-    while mode not in list(range(1, 5+6)):
+
+    while mode not in list(range(1, 7)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
-        except Exception as e:
+        except Exception:
             continue
     print()
+
     if mode == 1:
         res = test_cipher()
     elif mode == 2:
@@ -121,8 +89,14 @@ if __name__ == "__main__":
     elif mode == 4:
         res = test_fence()
     elif mode == 5:
+        res = test_brackets()
+    elif mode == 6:
         res = test_all_the_boxes()
     else:
         res = False
     if res:
         print("Everything passed")
+
+
+if __name__ == "__main__":
+    main()

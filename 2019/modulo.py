@@ -2,15 +2,13 @@ from itertools import permutations
 
 
 def main(n):
-    list_n = set(permutations(list(n)))
-    res = []
+    list_n = list(set(permutations(list(n))))
+    list_n.sort(reverse=True)
     for i in list_n:
-        n = 0
-        for c in i:
-            n = n*10 + int(c)
+        n = int("".join(i))
         if n % 8 == 5:
-            res.append(n)
-    return max(res) if len(res) > 0 else -1
+            return n
+    return -1
 
 
 if __name__ == "__main__":

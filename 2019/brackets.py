@@ -1,5 +1,6 @@
 from itertools import permutations
 
+
 def main(a, b, c):
     _sum = sum([a, b, c])
     assert _sum > 0
