@@ -1,4 +1,6 @@
 from cipher import main as cipher
+from parachute import main as parachute
+from keys import main as keys
 from boxes import main as boxes
 from modulo import main as modulo
 from fence import main as fence
@@ -26,6 +28,22 @@ def test_cipher():
          "welcome to stem games technology arena"),
     ]
     return test(data, cipher, "cipher")
+
+
+def test_parachute():
+    data = [(4.2, [0.53, 0.89], 0.94),
+            (2.72, [0.34, 1.53, 0.29, 0.11, 0.23], 0.65),
+            (69.69, [64.09, 2.88, 0.75, 1.02, 5.14, 0.42, 3.19, 4.5, 0.54,
+                     2.14, 1.18, 0.14, 1.68], 0.14)]
+    return test(data, parachute, "parachute")
+
+
+def test_keys():
+    data = [("[{", ["[/", "[\\"], 0), ("]%(", ["*[*", "]]%%(", "%+$"], 1),
+            ("-}&{&*+#%", ["}}&#%%", "-%", "&{&+%", "&&&+", "}}&{&*+##%",
+             "&{&*+#%", "-}{&%", "(&**+", "--&{{&**+#", "&&{{&**", "#%%",
+             "--&&%%"], 4)]
+    return test(data, keys, "keys")
 
 
 def test_boxes():
@@ -66,35 +84,27 @@ def test_all_the_boxes():
 def main():
     mode = 0
     input_string = """\n   1 - Cipher
-       2 - Boxes
-       3 - Modulo
-       4 - Fence
-       5 - Brackets
-       6 - All the boxes
+       2 - Parachute
+       3 - Keys 
+       4 - Boxes
+       5 - Modulo
+       6 - Fence
+       7 - Brackets
+       8 - All the boxes
        Choose the script you want to test: """
 
-    while mode not in list(range(1, 7)):
+    while mode not in list(range(1, 9)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception:
             continue
     print()
 
-    if mode == 1:
-        res = test_cipher()
-    elif mode == 2:
-        res = test_boxes()
-    elif mode == 3:
-        res = test_modulo()
-    elif mode == 4:
-        res = test_fence()
-    elif mode == 5:
-        res = test_brackets()
-    elif mode == 6:
-        res = test_all_the_boxes()
-    else:
-        res = False
-    if res:
+    # TODO 5 cities, 8 prime, 10 tables...
+    tests = [test_cipher, test_parachute, test_keys, test_boxes, test_modulo,
+             test_fence, test_brackets, test_all_the_boxes]
+
+    if tests[mode - 1]():
         print("Everything passed")
 
 
