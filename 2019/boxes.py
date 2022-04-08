@@ -1,5 +1,5 @@
 def main(m, n):
-    boxes = [True for _ in range(m)]
+    boxes = [True] * m
 
     for i in range(2, n+1):
         if i % 2:
@@ -11,5 +11,5 @@ def main(m, n):
 
 
 if __name__ == "__main__":
-    m, n = list(map(int, input().split()))
+    m, n = map(int, input().split())
     print(main(m, n))

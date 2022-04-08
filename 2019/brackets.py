@@ -62,7 +62,7 @@ def main(a, b, c, r=True):
 
 
 if __name__ == "__main__":
-    a, b, c = list(map(int, input().split()))
+    a, b, c = map(int, input().split())
     # start = time.time()
     # print(main(a, b, c, False))
     # end = time.time()

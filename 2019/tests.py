@@ -2,12 +2,13 @@ from cipher import main as cipher
 from parachute import main as parachute
 from keys import main as keys
 from boxes import main as boxes
+from cities import main as cities
 from modulo import main as modulo
 from prime import main as prime
 from fence import main as fence
 from tables import main as tables
-from brackets import main as brackets
 from more_boxes import main as more_boxes
+from brackets import main as brackets
 from all_the_boxes import main as all_the_boxes
 
 
@@ -54,6 +55,18 @@ def test_boxes():
     return test(data, boxes, "boxes")
 
 
+def test_cities():
+    data = [(2, [(0, 1)], [0], 1.5), (5, [(0, 1), (0, 2)], [1], 3.5),
+            (17, [(2, 8), (2, 14), (10, 11), (2, 13), (9, 15), (13, 16),
+             (3, 11), (2, 5), (1, 3), (15, 16), (5, 8), (7, 13), (0, 8),
+             (8, 14), (5, 13), (3, 9), (7, 16), (4, 13), (1, 2), (10, 15),
+             (0, 7), (5, 9), (1, 9), (6, 13), (11, 15), (0, 6), (4, 7),
+             (14, 15), (6, 15), (1, 11), (4, 16), (6, 9), (1, 15)], [3, 32,
+             30, 7, 31, 19, 18, 21, 0, 24, 12, 17, 22, 16, 8, 14, 1, 10, 26,
+             2, 29, 15], 2.91)]
+    return test(data, cities, "cities")
+
+
 def test_modulo():
     data = [("31", 13), ("1111", -1), ("361542", 654213)]
     return test(data, modulo, "modulo")
@@ -80,14 +93,14 @@ def test_tables():
     return test(data, tables, "tables")
 
 
-def test_brackets():
-    data = [(3, 0, 0, 5), (2, 1, 0, 15), (2, 2, 2, 11880)]
-    return test(data, brackets, "brackets")
-
-
 def test_more_boxes():
     data = [(3, 2, 2), (7, 4, 1), (7070, 420, 5691)]
     return test(data, more_boxes, "more_boxes")
+
+
+def test_brackets():
+    data = [(3, 0, 0, 5), (2, 1, 0, 15), (2, 2, 2, 11880)]
+    return test(data, brackets, "brackets")
 
 
 def test_all_the_boxes():
@@ -106,19 +119,19 @@ def main():
        2 - Parachute
        3 - Keys 
        4 - Boxes
-       5 - Modulo
-       6 - Prime
-       7 - Fence
-       8 - Brackets
+       5 - Cities
+       6 - Modulo
+       7 - Prime
+       8 - Fence
        9 - Tables
        10 - More boxes
-       11 - All the boxes
+       11 - Brackets
+       12 - All the boxes
        Choose the script you want to test: """
 
-    # TODO 5 cities
-    tests = [test_cipher, test_parachute, test_keys, test_boxes,
-             test_modulo, test_prime, test_fence, test_brackets, test_tables,
-             test_more_boxes, test_all_the_boxes]
+    tests = [test_cipher, test_parachute, test_keys, test_boxes, test_cities,
+             test_modulo, test_prime, test_fence, test_tables,
+             test_more_boxes, test_brackets, test_all_the_boxes]
 
     while mode not in list(range(1, len(tests)+1)):
         try:

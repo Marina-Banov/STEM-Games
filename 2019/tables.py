@@ -10,7 +10,7 @@ def main(tables, teams):
 
 
 if __name__ == "__main__":
-    n, m = list(map(int, input().split()))
+    n, m = map(int, input().split())
     tables = list(map(int, input().split()))
     teams = list(map(int, input().split()))
     print(main(tables, teams))

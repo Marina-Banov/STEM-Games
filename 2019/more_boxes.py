@@ -1,5 +1,5 @@
 def main(m, n):
-    boxes = [i for i in range(m)]
+    boxes = list(range(m))
     i = n-1
     while len(boxes) > 1:
         boxes.pop(i)
@@ -8,5 +8,5 @@ def main(m, n):
 
 
 if __name__ == "__main__":
-    m, n = list(map(int, input().split()))
+    m, n = map(int, input().split())
     print(main(m, n))

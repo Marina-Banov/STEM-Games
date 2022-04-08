@@ -3,7 +3,7 @@ def main(r, islands):
 
 
 if __name__ == "__main__":
-    r, m = list(map(float, input().split()))
+    r, m = map(float, input().split())
     islands = []
     for i in range(int(m)):
         islands.append(float(input()))
