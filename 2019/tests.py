@@ -7,6 +7,7 @@ from prime import main as prime
 from fence import main as fence
 from tables import main as tables
 from brackets import main as brackets
+from more_boxes import main as more_boxes
 from all_the_boxes import main as all_the_boxes
 
 
@@ -84,6 +85,11 @@ def test_brackets():
     return test(data, brackets, "brackets")
 
 
+def test_more_boxes():
+    data = [(3, 2, 2), (7, 4, 1), (7070, 420, 5691)]
+    return test(data, more_boxes, "more_boxes")
+
+
 def test_all_the_boxes():
     data = [
         (1, 7, 28), (1, 8, 36), (2, 7, 35), (2, 8, 46), (3, 7, 37),
@@ -105,13 +111,14 @@ def main():
        7 - Fence
        8 - Brackets
        9 - Tables
-       10 - All the boxes
+       10 - More boxes
+       11 - All the boxes
        Choose the script you want to test: """
 
     # TODO 5 cities
     tests = [test_cipher, test_parachute, test_keys, test_boxes,
              test_modulo, test_prime, test_fence, test_brackets, test_tables,
-             test_all_the_boxes]
+             test_more_boxes, test_all_the_boxes]
 
     while mode not in list(range(1, len(tests)+1)):
         try:
