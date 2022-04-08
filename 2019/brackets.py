@@ -2,14 +2,14 @@ from itertools import permutations
 # import time
 
 
-def recursion(brackets, stack, go):
+def recursion(brackets, stack):
     _sum = sum(brackets)
     assert _sum >= 0
     if _sum == 0:
         return 1
 
     _num = 0
-    for i in go:
+    for i in range(6):
         if brackets[i] < 1:
             continue
         if i % 2 != 0:
@@ -17,11 +17,11 @@ def recursion(brackets, stack, go):
                 continue
             if i - stack[-1] != 1:
                 continue
-            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], stack[:-1], go)
+            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], stack[:-1])
         else:
             tmp = stack.copy()
             tmp.append(i)
-            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], tmp, go)
+            _num += recursion(brackets[:i] + [brackets[i] - 1] + brackets[i+1:], tmp)
 
     return _num
 
@@ -56,7 +56,7 @@ def iteration(a, b, c):
 
 def main(a, b, c, r=True):
     if r:
-        return recursion([a, a, b, b, c, c], [], [0, 1, 2, 3, 4, 5])
+        return recursion([a, a, b, b, c, c], [])
     else:
         return iteration(a, b, c)
 

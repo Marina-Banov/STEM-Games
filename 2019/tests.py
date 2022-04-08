@@ -5,6 +5,7 @@ from boxes import main as boxes
 from modulo import main as modulo
 from prime import main as prime
 from fence import main as fence
+from tables import main as tables
 from brackets import main as brackets
 from all_the_boxes import main as all_the_boxes
 
@@ -72,6 +73,12 @@ def test_fence():
     return test(data, fence, "fence")
 
 
+def test_tables():
+    data = [([3, 2, 5], [2, 1, 4, 2, 6], [1, 1, 3, 2, 0]),
+            ([3, 2, 4, 1, 5, 5, 2, 6], [4, 4, 7, 1, 1, 5], [3, 5, 0, 1, 1, 6])]
+    return test(data, tables, "tables")
+
+
 def test_brackets():
     data = [(3, 0, 0, 5), (2, 1, 0, 15), (2, 2, 2, 11880)]
     return test(data, brackets, "brackets")
@@ -97,20 +104,21 @@ def main():
        6 - Prime
        7 - Fence
        8 - Brackets
-       9 - All the boxes
+       9 - Tables
+       10 - All the boxes
        Choose the script you want to test: """
 
-    while mode not in list(range(1, 10)):
+    # TODO 5 cities
+    tests = [test_cipher, test_parachute, test_keys, test_boxes,
+             test_modulo, test_prime, test_fence, test_brackets, test_tables,
+             test_all_the_boxes]
+
+    while mode not in list(range(1, len(tests)+1)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception:
             continue
     print()
-
-    # TODO 5 cities, 10 tables...
-    tests = [test_cipher, test_parachute, test_keys, test_boxes,
-             test_modulo, test_prime, test_fence, test_brackets,
-             test_all_the_boxes]
 
     if tests[mode - 1]():
         print("Everything passed")
