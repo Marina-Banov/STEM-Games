@@ -3,6 +3,7 @@ from parachute import main as parachute
 from keys import main as keys
 from boxes import main as boxes
 from modulo import main as modulo
+from prime import main as prime
 from fence import main as fence
 from brackets import main as brackets
 from all_the_boxes import main as all_the_boxes
@@ -34,7 +35,7 @@ def test_parachute():
     data = [(4.2, [0.53, 0.89], 0.94),
             (2.72, [0.34, 1.53, 0.29, 0.11, 0.23], 0.65),
             (69.69, [64.09, 2.88, 0.75, 1.02, 5.14, 0.42, 3.19, 4.5, 0.54,
-                     2.14, 1.18, 0.14, 1.68], 0.14)]
+             2.14, 1.18, 0.14, 1.68], 0.14)]
     return test(data, parachute, "parachute")
 
 
@@ -54,6 +55,11 @@ def test_boxes():
 def test_modulo():
     data = [("31", 13), ("1111", -1), ("361542", 654213)]
     return test(data, modulo, "modulo")
+
+
+def test_prime():
+    data = [(3, 11), (54, 295485799), (4269, 55882399)]
+    return test(data, prime, "prime")
 
 
 def test_fence():
@@ -88,21 +94,23 @@ def main():
        3 - Keys 
        4 - Boxes
        5 - Modulo
-       6 - Fence
-       7 - Brackets
-       8 - All the boxes
+       6 - Prime
+       7 - Fence
+       8 - Brackets
+       9 - All the boxes
        Choose the script you want to test: """
 
-    while mode not in list(range(1, 9)):
+    while mode not in list(range(1, 10)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception:
             continue
     print()
 
-    # TODO 5 cities, 8 prime, 10 tables...
-    tests = [test_cipher, test_parachute, test_keys, test_boxes, test_modulo,
-             test_fence, test_brackets, test_all_the_boxes]
+    # TODO 5 cities, 10 tables...
+    tests = [test_cipher, test_parachute, test_keys, test_boxes,
+             test_modulo, test_prime, test_fence, test_brackets,
+             test_all_the_boxes]
 
     if tests[mode - 1]():
         print("Everything passed")

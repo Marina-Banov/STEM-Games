@@ -12,19 +12,19 @@ def main(coordinates):
         min([c for c in coordinates if c[1] == southest[1]])
     )
     n_turns = 0
-    cur_point = starting_point
+    prev_point = starting_point
     for i in range(len(coordinates)-2):
-        next_point = (i + starting_point + 1) % len(coordinates)
+        cur_angle = (i + starting_point + 1) % len(coordinates)
+        if cur_angle == 0:
+            cur_angle = 1
+        next_point = (cur_angle + 1) % len(coordinates)
         if next_point == 0:
             next_point = 1
-        next_next_point = (next_point + 1) % len(coordinates)
-        if next_next_point == 0:
-            next_next_point = 1
-        diff1 = diff(coordinates[cur_point], coordinates[next_point])
-        diff2 = diff(coordinates[next_point], coordinates[next_next_point])
+        diff1 = diff(coordinates[prev_point], coordinates[cur_angle])
+        diff2 = diff(coordinates[cur_angle], coordinates[next_point])
         if cross_prod(diff1, diff2) > 0:
             n_turns += 1
-        cur_point = next_point
+        prev_point = cur_angle
     return n_turns
 
 
