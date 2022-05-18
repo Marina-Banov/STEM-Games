@@ -1,4 +1,5 @@
 from d_spam import main as d_spam
+from g_tree_age import main as g_tree_age
 from h_farm import main as h_farm
 from i_ribbons import main as i_ribbons
 from j_migrations import main as j_migrations
@@ -23,6 +24,12 @@ def test_d_spam():
     return test(data, d_spam, "d_spam")
 
 
+def test_g_tree_age():
+    data = [(["one", "two", "three", "zero", "zero"], 464879958),
+            (["zero", "zero", "zero", "one"], 525600)]
+    return test(data, g_tree_age, "g_tree_age")
+
+
 def test_h_farm():
     data = [(["##.#", "...#", "....", ".###"], 6)]
     return test(data, h_farm, "h_farm")
@@ -41,12 +48,14 @@ def test_j_migrations():
 def main():
     mode = 0
     input_string = """\n   1 - D Spam
-       2 - H Farm
-       3 - I Ribbons
-       4 - J Migrations
+       2 - G Tree age
+       3 - H Farm
+       4 - I Ribbons
+       5 - J Migrations
        Choose the script you want to test: """
 
-    tests = [test_d_spam, test_h_farm, test_i_ribbons, test_j_migrations]
+    tests = [test_d_spam, test_g_tree_age, test_h_farm, test_i_ribbons,
+             test_j_migrations]
 
     while mode not in list(range(1, len(tests)+1)):
         try:
