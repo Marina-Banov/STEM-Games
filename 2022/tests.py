@@ -29,7 +29,7 @@ def test_h_farm():
 
 
 def test_i_ribbons():
-    data = [(3, 5, 2), (5, 3, 4), (1, 1, 0), (6, 3, 3)]
+    data = [(3, 5, 2), (5, 3, 4), (1, 1, 0), (6, 3, 3), (5, 4, 4), (6, 4, 4)]
     return test(data, i_ribbons, "i_ribbons")
 
 
