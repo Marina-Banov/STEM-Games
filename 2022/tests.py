@@ -1,4 +1,5 @@
 from d_spam import main as d_spam
+from h_farm import main as h_farm
 from i_ribbons import main as i_ribbons
 from j_migrations import main as j_migrations
 
@@ -22,6 +23,11 @@ def test_d_spam():
     return test(data, d_spam, "d_spam")
 
 
+def test_h_farm():
+    data = [(["##.#", "...#", "....", ".###"], 6)]
+    return test(data, h_farm, "h_farm")
+
+
 def test_i_ribbons():
     data = [(3, 5, 2), (5, 3, 4), (1, 1, 0), (6, 3, 3)]
     return test(data, i_ribbons, "i_ribbons")
@@ -35,11 +41,12 @@ def test_j_migrations():
 def main():
     mode = 0
     input_string = """\n   1 - D Spam
-       2 - I Ribbons
-       3 - J Migrations
+       2 - H Farm
+       3 - I Ribbons
+       4 - J Migrations
        Choose the script you want to test: """
 
-    tests = [test_d_spam, test_i_ribbons, test_j_migrations]
+    tests = [test_d_spam, test_h_farm, test_i_ribbons, test_j_migrations]
 
     while mode not in list(range(1, len(tests)+1)):
         try:
