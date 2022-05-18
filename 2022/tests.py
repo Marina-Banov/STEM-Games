@@ -1,3 +1,4 @@
+from d_spam import main as d_spam
 from i_ribbons import main as i_ribbons
 from j_migrations import main as j_migrations
 
@@ -16,6 +17,11 @@ def test(data, f, name):
     return True
 
 
+def test_d_spam():
+    data = [("ssppamam", 2), ("spspaxaaspmmmmm", 2), ("amspamspm", 1)]
+    return test(data, d_spam, "d_spam")
+
+
 def test_i_ribbons():
     data = [(3, 5, 2), (5, 3, 4), (1, 1, 0), (6, 3, 3)]
     return test(data, i_ribbons, "i_ribbons")
@@ -28,11 +34,12 @@ def test_j_migrations():
 
 def main():
     mode = 0
-    input_string = """\n   1 - I Ribbons
-       2 - J Migrations
+    input_string = """\n   1 - D Spam
+       2 - I Ribbons
+       3 - J Migrations
        Choose the script you want to test: """
 
-    tests = [test_i_ribbons, test_j_migrations]
+    tests = [test_d_spam, test_i_ribbons, test_j_migrations]
 
     while mode not in list(range(1, len(tests)+1)):
         try:

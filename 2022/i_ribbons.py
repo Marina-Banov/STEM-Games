@@ -1,15 +1,9 @@
 def main(n, m):
     if m % n == 0:
         return 0
-    i = 0
-    c = 0
-    # print()
-    while i < n*m:
-        i += m
-        if i % n:
-            # print(i)
-            c += 1
-    return c
+    _i = set(range(0, n*m, m))
+    _f = set(range(0, n*m, n)).intersection(_i)
+    return len(_i) - len(_f)
 
 
 if __name__ == "__main__":
