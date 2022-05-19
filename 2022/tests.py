@@ -1,3 +1,4 @@
+from c_chess import main as c_chess
 from d_spam import main as d_spam
 from d_the_end_of_the_world import main as d_the_end_of_the_world
 from g_tree_age import main as g_tree_age
@@ -18,6 +19,16 @@ def test(data, f, name):
             print(e)
             return False
     return True
+
+
+def test_c_chess():
+    data = [(["........", "........", "........", ".#......", ".#......",
+              ".#......", "........", "........"], "queen"),
+            (["........", "..#.....", "........", "........", ".....#..",
+              "........", "........", "........"], "knight"),
+            (["........", "........", "..###...", ".#......", "........",
+              ".#......", "..#.....", "........"], "impossible")]
+    return test(data, c_chess, "c_chess")
 
 
 def test_d_spam():
@@ -53,18 +64,19 @@ def test_j_migrations():
 
 def main():
     mode = 0
-    input_string = """\n   1 - D Spam
-       2 - D The end of the world
-       3 - G Tree age
-       4 - H Farm
-       5 - I Ribbons
-       6 - J Migrations
+    input_string = """\n   1 - C Chess
+       2 - D Spam
+       3 - D The end of the world
+       4 - G Tree age
+       5 - H Farm
+       6 - I Ribbons
+       7 - J Migrations
        Choose the script you want to test: """
 
-    tests = [test_d_spam, test_d_the_end_of_the_world, test_g_tree_age,
-             test_h_farm, test_i_ribbons, test_j_migrations]
+    tests = [test_c_chess, test_d_spam, test_d_the_end_of_the_world,
+             test_g_tree_age, test_h_farm, test_i_ribbons, test_j_migrations]
 
-    while mode not in list(range(1, len(tests)+1)):
+    while mode not in list(range(1, len(tests) + 1)):
         try:
             mode = int(input(input_string.replace("\n    ", "\n")))
         except Exception:
