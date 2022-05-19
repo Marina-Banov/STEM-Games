@@ -1,4 +1,5 @@
 from d_spam import main as d_spam
+from d_the_end_of_the_world import main as d_the_end_of_the_world
 from g_tree_age import main as g_tree_age
 from h_farm import main as h_farm
 from i_ribbons import main as i_ribbons
@@ -22,6 +23,11 @@ def test(data, f, name):
 def test_d_spam():
     data = [("ssppamam", 2), ("spspaxaaspmmmmm", 2), ("amspamspm", 1)]
     return test(data, d_spam, "d_spam")
+
+
+def test_d_the_end_of_the_world():
+    data = [(300, 299, 30, 2), (3, 2, 2, -1), (200, 100, 30, -1)]
+    return test(data, d_the_end_of_the_world, "d_the_end_of_the_world")
 
 
 def test_g_tree_age():
@@ -48,14 +54,15 @@ def test_j_migrations():
 def main():
     mode = 0
     input_string = """\n   1 - D Spam
-       2 - G Tree age
-       3 - H Farm
-       4 - I Ribbons
-       5 - J Migrations
+       2 - D The end of the world
+       3 - G Tree age
+       4 - H Farm
+       5 - I Ribbons
+       6 - J Migrations
        Choose the script you want to test: """
 
-    tests = [test_d_spam, test_g_tree_age, test_h_farm, test_i_ribbons,
-             test_j_migrations]
+    tests = [test_d_spam, test_d_the_end_of_the_world, test_g_tree_age,
+             test_h_farm, test_i_ribbons, test_j_migrations]
 
     while mode not in list(range(1, len(tests)+1)):
         try:
