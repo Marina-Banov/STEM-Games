@@ -120,9 +120,7 @@ def main(board):
         for j in range(8):
             if is_attacking[i][j] < len(under_attack):
                 continue
-            rj = check_figure(board, under_attack, i, j)
-            if rj < ans:
-                ans = rj
+            ans = min(ans, check_figure(board, under_attack, i, j))
     return possible_answers[ans]
 
 
